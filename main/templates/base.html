@@ -1,0 +1,80 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Your Project{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .messages {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .messages li {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .error {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+
+        .success {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+    </style>
+    <!-- Include the following script in the <head> section of your base.html or template -->
+
+<script>
+    function showWarning(message) {
+        alert(message);
+    }
+
+    // Add this function to the onClick event of the submit button in signup.html
+    function validateSignup() {
+        var password = document.getElementById('id_password').value;
+        var confirmPassword = document.getElementById('id_confirm_password').value;
+
+        if (password !== confirmPassword) {
+            showWarning('Passwords do not match. Please enter matching passwords.');
+            return false;
+        }
+
+        var email = document.getElementById('id_email').value;
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailRegex.test(email)) {
+            showWarning('Invalid email address. Please enter a valid email.');
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+</head>
+<body>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+</body>
+</html>

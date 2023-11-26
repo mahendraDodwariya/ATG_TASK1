@@ -1,0 +1,16 @@
+<!-- templates/patient_dashboard.html -->
+{% extends 'base.html' %}
+
+{% block title %}Patient Dashboard{% endblock %}
+
+{% block content %}
+    <div style="max-width: 400px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <h2 style="text-align: center;">Patient Dashboard</h2>
+        <h3>Welcome, {{ user.username }}!</h3>
+        <img src="{{ user.userprofile.profile_picture.url }}" alt="Profile Picture" style="max-width: 200px; max-height: 200px;">
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Address:</strong> {{ user.userprofile.address_line1 }}, {{ user.userprofile.city }}, {{ user.userprofile.state }} - {{ user.userprofile.pincode }}</p>
+        <p><strong>User Type:</strong> {{ user.userprofile.user_type }}</p>
+         
+    </div>
+{% endblock %}
